@@ -13,7 +13,7 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <div className="fixed bg-gradient-to-br from-slate-800 w-full to-zinc-900 text-white flex items-center justify-between p-4 shadow-lg">
+    <div className="fixed bg-gradient-to-br z-20 from-slate-800 w-full to-zinc-900 text-white flex items-center justify-between p-4 shadow-lg">
       <div className="flex items-center space-x-3 group cursor-pointer">
         <div className="relative">
           <FaSchool className="text-4xl text-indigo-500 group-hover:animate-spin transition-all duration-300" />

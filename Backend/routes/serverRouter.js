@@ -1,51 +1,37 @@
 const express = require('express');
 const axios = require('axios');
-const dotenv = require('dotenv');
-const serverRouter = express.Router();
+const AiRouter = express.Router();
 
-dotenv.config();
+AiRouter.post('/chat', async (req, res) => {
+  const { message } = req.body;
 
-// Use express.json() middleware to parse the request body
-serverRouter.use(express.json());
+  if (!message) {
+    return res.status(400).json({ error: 'Message is required.' });
+  }
 
-serverRouter.post('/ai', async (req, res) => {
-  const { prompt } = req.body;
-
-  if (!prompt) {
-    return res.status(400).json({ error: 'Prompt is required' });
+  const apiKey = process.env.HUGGINGFACE_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: 'Hugging Face API key is missing.' });
   }
 
   try {
     const response = await axios.post(
-      'https://api.openai.com/v1/chat/completions', // Correct endpoint for chat models
-      {
-        model: 'gpt-3.5-turbo',  // Use 'gpt-3.5-turbo' or 'gpt-4' for newer models
-        messages: [{ role: 'user', content: prompt }],
-        max_tokens: 150, // Increased token limit for a more detailed response
-      },
+      'https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill',
+      { inputs: message },
       {
         headers: {
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          Authorization: `Bearer ${apiKey}`,
         },
       }
     );
 
-    res.json({ response: response.data.choices[0].message.content.trim() });
-  } catch (error) {
-    console.error('Error communicating with OpenAI API:', error);
 
-    if (error.response) {
-      res.status(error.response.status).json({
-        error: 'Error from OpenAI API',
-        message: error.response.data,
-      });
-    } else {
-      res.status(500).json({
-        error: 'Internal Server Error',
-        message: error.message,
-      });
-    }
+    const botResponse = response.data[0]?.generated_text || 'Sorry, I couldn\'t respond.';
+    return res.status(200).json({ reply: botResponse });
+  } catch (error) {
+    console.error('Error with AI request:', error);
+    return res.status(500).json({ error: 'AI service failed. Try again later.' });
   }
 });
 
-module.exports = serverRouter;
+module.exports = AiRouter;

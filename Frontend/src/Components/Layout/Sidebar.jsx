@@ -12,6 +12,7 @@ const ResponsiveSidebar = () => {
     { title: "Result", link: "/layout/result", emoji: "📊" },
     { title: "Attendance", link: "/layout/attendance", emoji: "📋" },
     { title: "Block User", link: "/layout/block", emoji: "🚫" },
+    { title: "Help Messages", link: "/layout/help", emoji: "💬" },
     { title: "Logout", link: "/layout/logout", emoji: "🚪" },
     { title: "Delete Profile", link: "/layout/delete", emoji: "🗑️" },
   ];
@@ -22,7 +23,7 @@ const ResponsiveSidebar = () => {
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   if (role === "Student") {
-    links.splice(7, 2);
+    links.splice(7, 3);
   }
 
   if (role === "Teacher") {
@@ -41,7 +42,7 @@ const ResponsiveSidebar = () => {
         >
           ✕
         </button>
-        <div className="text-blue-900 p-4 space-y-4 mt-10">
+        <div className="text-blue-900 p-4 space-y-4 mt-10 md:mt-0">
           <h1 className="md:text-3xl font-bold md:hidden">Sidebar</h1>
           <ul className="space-y-4">
             {links.map((item, i) => (
