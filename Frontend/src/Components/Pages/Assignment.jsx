@@ -14,7 +14,7 @@ const AssignmentSection = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get("http://localhost:3000/api/get-assignment", {
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/get-assignment`, {
             withCredentials: true,
           });
           setAssignData(response.data.assignment);
@@ -29,7 +29,7 @@ const AssignmentSection = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get("http://localhost:3000/api/get-all-assignment", {
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/get-all-assignment`, {
             withCredentials: true,
           });
           setAssignData(response.data.assignment);
@@ -62,7 +62,7 @@ const AssignmentSection = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/add-assignment",
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/add-assignment`,
         formData,
         { withCredentials: true }
       );
@@ -84,7 +84,7 @@ const AssignmentSection = () => {
 
   const deleteAssignment = async ({ id }) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/api/delete-assignment/${id}`, { withCredentials: true });
+      const response = await axios.delete(`${import.meta.env.VITE_BACKEND_BASEURL}/api/delete-assignment/${id}`, { withCredentials: true });
       toast.success(response.data.message);
       setChangeUI(id);
     } catch (error) {

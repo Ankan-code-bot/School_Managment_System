@@ -17,7 +17,7 @@ export const EditProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/user-details", {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/user-details`, {
           withCredentials: true,
         });
         setUserData(response.data);
@@ -46,7 +46,7 @@ export const EditProfile = () => {
 
     try {
       const response = await axios.put(
-        "http://localhost:3000/api/update-info",
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/update-info`,
         formData,
         { withCredentials: true }
       );

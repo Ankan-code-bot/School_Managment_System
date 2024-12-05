@@ -4,7 +4,6 @@ export const Footer = () => {
   return (
     <footer className=" text-zinc-300 py-6 px-4 bg-gradient-to-br from-slate-800 to-zinc-900">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
-        {/* Left Section */}
         <div className="text-sm md:text-base">
           <span>&copy; {new Date().getFullYear()} School Management System. All Rights Reserved.</span>
         </div>
@@ -39,22 +38,6 @@ export const Footer = () => {
           >
             Facebook
           </a>
-          {/* <a
-            href="https://www.twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200"
-          >
-            Twitter
-          </a>
-          <a
-            href="https://www.linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200"
-          >
-            LinkedIn
-          </a> */}
         </div>
       </div>
     </footer>

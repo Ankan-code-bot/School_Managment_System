@@ -35,7 +35,7 @@ export const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/api/login", formData, { withCredentials: true });
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/login`, formData, { withCredentials: true });
       localStorage.setItem("role", response.data.role);
       localStorage.setItem("userId", response.data.userId);
       await dispatch(logIn());
@@ -45,6 +45,9 @@ export const Login = () => {
       setTimeout(() => {
         navigate('/layout');
       }, 2500);
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 4000);
     } catch (error) {
       console.error("Error Response:", error.response?.data || error.message);
       toast.error(error.response?.data?.message || "Login failed");
@@ -55,7 +58,7 @@ export const Login = () => {
   const handlePassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/get-otp", {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/get-otp`, {
         email: formData.email,
       });
       toast.success(response.data.message);
@@ -73,7 +76,7 @@ export const Login = () => {
       return;
     }
     try {
-      const response = await axios.put("http://localhost:3000/api/forgot-password", {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_BASEURL}/api/forgot-password`, {
         email: formData.email,
         otp: formData.otp,
         newPass: formData.newPass,

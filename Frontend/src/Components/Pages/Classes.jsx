@@ -11,7 +11,7 @@ const ClassesPage = () => {
   const handleClassClick = (className) => {
     const fetchAttendanceSheet = async () => {
       try {
-        const response = await axios.post("http://localhost:3000/api/add-new-attendance", { className }, { withCredentials: true });
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/add-new-attendance`, { className }, { withCredentials: true });
         const attendId = response.data.attendId;
         localStorage.setItem("attendId", attendId);
         toast.success(response.data.message);

@@ -8,7 +8,7 @@ const Message = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/all-msg', {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/all-msg`, {
           withCredentials: true
         });
         setMessages(response.data.messages);
@@ -35,8 +35,9 @@ const Message = () => {
         ) : (
           messages.map((msg, index) => (
             <div key={index} className="bg-gray-700 p-4 rounded-md shadow-md">
-              <p className="font-semibold">{msg.title}</p>
-              <p>{msg.content}</p>
+              <p>{msg.
+                message
+              }</p>
               <span className="text-sm text-gray-400">{new Date(msg.createdAt).toLocaleString()}</span>
             </div>
           ))

@@ -5,9 +5,9 @@ export const Logout = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Perform logout logic here
     console.log("Logged out");
-    navigate('/login'); // Redirect to login page after logout
+    navigate('/login');
+    localStorage.clear();
   };
 
   const handleCancel = () => {

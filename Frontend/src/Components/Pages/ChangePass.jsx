@@ -24,7 +24,7 @@ export const ChangePass = () => {
   const handlePassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/get-otp", {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/get-otp`, {
         email: formData.email,
         userId: userId
       });
@@ -43,7 +43,7 @@ export const ChangePass = () => {
       return;
     }
     try {
-      const response = await axios.put("http://localhost:3000/api/forgot-password", {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_BASEURL}/api/forgot-password`, {
         email: formData.email,
         otp: formData.otp,
         newPass: formData.newPass,

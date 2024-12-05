@@ -9,11 +9,10 @@ export const Notifications = () => {
   const [ShowNotifications, setShowNotifications] = useState(true);
   const role = localStorage.getItem("role");
 
-  // Fetch notifications
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/get-all-notifications", {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/get-all-notifications`, {
           withCredentials: true,
         });
         setNotifications(response.data.notifications || []);
@@ -25,32 +24,29 @@ export const Notifications = () => {
     fetchNotifications();
   }, []);
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/give-new-notification",
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/give-new-notification`,
         formValues,
         { withCredentials: true }
       );
       toast.success(response.data.message);
 
-      // Update UI immediately with the new notification
       const newNotification = {
         ...formValues,
         time: "Just now",
       };
       setNotifications((prev) => [newNotification, ...prev]);
-      setFormValues({ title: "", description: "" }); // Reset form
+      setFormValues({ title: "", description: "" });
     } catch (error) {
       console.error("Error creating notification:", error);
       toast.error("Failed to create notification");
     }
   };
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });

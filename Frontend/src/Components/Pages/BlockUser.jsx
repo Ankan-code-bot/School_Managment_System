@@ -12,7 +12,7 @@ export const DeleteUser = () => {
     }
 
     try {
-      const response = await axios.delete("http://localhost:3000/api/delete-user", {
+      const response = await axios.delete(`${import.meta.env.VITE_BACKEND_BASEURL}/api/delete-user`, {
         data: { userId },
       }, { withCredentials: true }
       );

@@ -39,7 +39,7 @@ export const SignUp = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/api/sign-up", formData, { withCredentials: true });
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/sign-up`, formData, { withCredentials: true });
       toast.success(response.data.message);
       navigate('/login');
     } catch (error) {

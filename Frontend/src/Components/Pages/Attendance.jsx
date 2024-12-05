@@ -11,7 +11,7 @@ const AttendancePage = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/get-all-user/${className}`, { withCredentials: true });
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/get-all-user/${className}`, { withCredentials: true });
         setStudents(response.data.allUser);
         console.log(attendId);
 
@@ -32,7 +32,7 @@ const AttendancePage = () => {
     const updateAttendance = async () => {
       try {
         const response = await axios.put(
-          `http://localhost:3000/api/make-attendance/${studentId}`,
+          `${import.meta.env.VITE_BACKEND_BASEURL}/api/make-attendance/${studentId}`,
           { attendId },
           { withCredentials: true }
         );

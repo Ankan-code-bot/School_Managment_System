@@ -41,7 +41,7 @@ export const Layout = () => {
           </div>
         </div>
       ) : (
-        <UnauthorizedPage /> // Render UnauthorizedPage if not logged in
+        <UnauthorizedPage />
       )}
     </>
   );

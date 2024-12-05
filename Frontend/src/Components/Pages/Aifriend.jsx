@@ -16,7 +16,7 @@ const AIChat = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/chat', { message: input });
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/chat`, { message: input });
       const aiMessage = { sender: 'ai', text: response.data.reply };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
@@ -35,7 +35,7 @@ const AIChat = () => {
   return (
     <div className="min-h-screen bg-[url(https://images.wallpapersden.com/image/download/amazing-night-at-mountains_bGpobGuUmZqaraWkpJRmbmdlrWZqaGc.jpg)] text-white flex flex-col items-center">
       <h1 className="text-3xl font-bold mt-8 hidden md:block">AI Chat</h1>
-      <div className="w-ful max-w-md h-[85vh] md:h-[89vh] bg-[url(https://th.bing.com/th/id/OIP.qXVdP1wDYqfuK3dYMQg2TQHaL2?rs=1&pid=ImgDetMain)] p-4 rounded-md mt-4 flex flex-col space-y-3">
+      <div className="w-full max-w-md h-[85vh] md:h-[89vh] bg-[url(https://th.bing.com/th/id/OIP.qXVdP1wDYqfuK3dYMQg2TQHaL2?rs=1&pid=ImgDetMain)] p-4 rounded-md mt-4 flex flex-col space-y-3">
         <div className="flex-grow overflow-y-auto h-96">
           {messages.map((msg, index) => (
             <div

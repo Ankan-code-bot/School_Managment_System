@@ -19,7 +19,7 @@ const AddResult = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/get-result", {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/get-result`, {
           withCredentials: true,
         });
         setResults(response.data.results);
@@ -32,7 +32,6 @@ const AddResult = () => {
     fetchResults();
   }, []);
 
-  console.log(results);
 
   const [formData, setFormData] = useState({
     studentId: "",
@@ -54,7 +53,7 @@ const AddResult = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/post-result",
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/post-result`,
         formData,
         { withCredentials: true }
       );

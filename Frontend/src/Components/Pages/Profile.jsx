@@ -13,7 +13,7 @@ export const Profile = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/user-details", {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/user-details`, {
           withCredentials: true,
         });
         setUserData(response.data);
@@ -30,7 +30,7 @@ export const Profile = () => {
       const fetchAttendanceData = async () => {
         try {
           const response = await axios.post(
-            `http://localhost:3000/api/get-all-attendace`,
+            `${import.meta.env.VITE_BACKEND_BASEURL}/api/get-all-attendace`,
             { className: userData.className },
             {
               withCredentials: true,
@@ -66,7 +66,7 @@ export const Profile = () => {
 
         try {
           const response = await axios.post(
-            "http://localhost:3000/api/change-image",
+            `${import.meta.env.VITE_BACKEND_BASEURL}/api/change-image`,
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },

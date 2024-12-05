@@ -100,7 +100,11 @@ userRouter.post('/login', async (req, res) => {
       process.env.SECRET_KEY
     );
 
-    await res.cookie('token', token);
+    await res.cookie('token', token, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true
+    });
 
 
     return res.status(200).json({
@@ -161,6 +165,17 @@ userRouter.put('/forgot-password', otpVerify, async (req, res) => {
 userRouter.delete('/delete-user', async (req, res) => {
   try {
     const { userId } = req.body;
+    await user.findByIdAndDelete(userId);
+    return res.status(200).json({ message: "User Deleted Successfully." });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server error" });
+    console.log(error);
+  }
+});
+
+userRouter.delete('/delete-profile', authentication, async (req, res) => {
+  try {
+    const userId = req.user.userId;
     await user.findByIdAndDelete(userId);
     return res.status(200).json({ message: "User Deleted Successfully." });
   } catch (error) {

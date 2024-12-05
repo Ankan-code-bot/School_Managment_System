@@ -22,8 +22,6 @@ import Message from "./Components/Pages/Message";
 const App = () => {
   const LogIn = useSelector((state) => state.auth.isLogged);
 
-  console.log(LogIn);
-
   return (
     <div>
       <Routes>

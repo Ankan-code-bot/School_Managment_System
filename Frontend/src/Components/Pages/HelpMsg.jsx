@@ -17,7 +17,7 @@ export const HelpMsg = ({ setIsHome }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/send-msg', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/send-msg`, {
         message,
       });
 
