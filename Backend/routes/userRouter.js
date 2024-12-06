@@ -100,10 +100,7 @@ userRouter.post('/login', async (req, res) => {
       process.env.SECRET_KEY
     );
 
-    await res.cookie('token', token, {
-      httpOnly: true,
-      sameSite: "none",
-    });
+    await res.cookie('token', token);
 
 
     return res.status(200).json({
