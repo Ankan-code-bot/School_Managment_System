@@ -26,6 +26,10 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/', (req, res) => {
+  return res.send("Welcome");
+})
+
 // Routes
 app.use('/api', userRouter);
 app.use('/api', otpRouter);
