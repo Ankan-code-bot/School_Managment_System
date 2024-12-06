@@ -36,23 +36,28 @@ export const Login = () => {
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/login`, formData, { withCredentials: true });
-      localStorage.setItem("role", response.data.role);
-      localStorage.setItem("userId", response.data.userId);
-      await dispatch(logIn());
-      localStorage.setItem("isLogged", true);
-      dispatch(changeRole(response.data.role));
-      toast.success(response.data.message);
+
+      console.log(response.data);
+
+      const { role, userId, message } = response.data;
+
+      localStorage.setItem("role", role);
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("isLogged", "true");
+
+      dispatch(logIn());
+      dispatch(changeRole(role));
+
+      toast.success(message);
       setTimeout(() => {
         navigate('/layout');
       }, 2500);
-      setTimeout(() => {
-        window.location.reload(true);
-      }, 4000);
     } catch (error) {
-      console.error("Error Response:", error.response?.data || error.message);
+      console.error("Login Error:", error.response?.data || error.message);
       toast.error(error.response?.data?.message || "Login failed");
     }
   };
+
 
   const [Isotp, setIsotp] = useState(false);
   const handlePassword = async (e) => {
