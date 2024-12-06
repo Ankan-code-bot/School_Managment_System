@@ -103,7 +103,6 @@ userRouter.post('/login', async (req, res) => {
     await res.cookie('token', token, {
       httpOnly: true,
       sameSite: "none",
-      secure: true
     });
 
 
