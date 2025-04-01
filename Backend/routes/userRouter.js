@@ -118,7 +118,7 @@ userRouter.post('/login', async (req, res) => {
 
 
 
-userRouter.get('/user-details', authentication, async (req, res) => {
+userRouter.get('/user-details', async (req, res) => {
   try {
     const userId = req.user.userId;
     console.log(req.user.email);
